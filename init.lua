@@ -70,6 +70,9 @@ require('lazy').setup({
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
 
+  -- Remeber last place in files
+  'ethanholz/nvim-lastplace',
+
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
@@ -191,7 +194,7 @@ require('lazy').setup({
 -- See `:help vim.o`
 
 -- Set highlight on search
-vim.o.hlsearch = false
+vim.o.hlsearch = true
 
 -- Make line numbers default
 vim.wo.number = true
@@ -211,7 +214,7 @@ vim.o.breakindent = true
 vim.o.undofile = true
 
 -- Case insensitive searching UNLESS /C or capital in search
-vim.o.ignorecase = true
+vim.o.ignorecase = false
 vim.o.smartcase = true
 
 -- Keep signcolumn on by default
@@ -227,6 +230,14 @@ vim.o.completeopt = 'menuone,noselect'
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
+
+vim.o.showmatch = true        -- Highlight matching parenthesis
+vim.o.foldmethod = 'marker'   -- Enable folding (default 'foldmarker')
+vim.o.colorcolumn = '80'      -- Line lenght marker at 80 columns
+vim.o.splitright = true       -- Vertical split to the right
+vim.o.splitbelow = true       -- Horizontal split to the bottom
+vim.o.linebreak = true        -- Wrap on word boundary
+vim.o.laststatus=3            -- Set global statusline
 
 -- [[ Basic Keymaps ]]
 
@@ -248,6 +259,11 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   group = highlight_group,
   pattern = '*',
 })
+
+require('onedark').setup {
+    style = 'darker'
+}
+require('onedark').load()
 
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
@@ -486,6 +502,12 @@ cmp.setup {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
   },
+}
+
+require'nvim-lastplace'.setup {
+    lastplace_ignore_buftype = {"quickfix", "nofile", "help"},
+    lastplace_ignore_filetype = {"gitcommit", "gitrebase", "svn", "hgcommit"},
+    lastplace_open_folds = true
 }
 
 -- The line beneath this is called `modeline`. See `:help modeline`
