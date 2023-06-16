@@ -142,7 +142,11 @@ require('lazy').setup({
     'navarasu/onedark.nvim',
     priority = 1000,
     config = function()
+      vim.opt.list = true
+      vim.opt.listchars:append "space: "
+      vim.opt.listchars:append "eol:↴"
       vim.cmd.colorscheme 'onedark'
+      vim.cmd [[highlight IndentBlanklineIndent7 guifg=#555555 gui=nocombine]]
     end,
   },
 
@@ -152,7 +156,7 @@ require('lazy').setup({
     -- See `:help lualine.txt`
     opts = {
       options = {
-        icons_enabled = false,
+        icons_enabled = true,
         theme = 'onedark',
         component_separators = '|',
         section_separators = '',
@@ -168,6 +172,11 @@ require('lazy').setup({
     opts = {
       char = '┊',
       show_trailing_blankline_indent = false,
+      show_current_context = true,
+      show_current_context_start = false,
+      show_end_of_line = true,
+      space_char_blankline = " ",
+      char_highlight_list = { "IndentBlanklineIndent7" },
     },
   },
 
@@ -254,6 +263,7 @@ vim.o.completeopt = 'menuone,noselect'
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
+vim.cmd [[highlight IndentBlanklineIndentHL1 guifg=#555555 gui=nocombine]]
 
 vim.o.showmatch = true        -- Highlight matching parenthesis
 vim.o.foldmethod = 'marker'   -- Enable folding (default 'foldmarker')
@@ -261,7 +271,8 @@ vim.o.colorcolumn = '80'      -- Line lenght marker at 80 columns
 vim.o.splitright = true       -- Vertical split to the right
 vim.o.splitbelow = true       -- Horizontal split to the bottom
 vim.o.linebreak = true        -- Wrap on word boundary
-vim.o.laststatus=3            -- Set global statusline
+vim.o.laststatus = 3          -- Set global statusline
+vim.o.cursorline = true       -- Highlight all lines with a cursor
 
 -- [[ Basic Keymaps ]]
 
