@@ -165,6 +165,16 @@ require('lazy').setup({
   },
 
   {
+    'github/copilot.vim',
+    config = function()
+        --vim.g.copilot_no_tab_map = true
+        vim.g.copilot_assume_mapped = true
+        vim.g.copilot_tab_fallback = ""
+        vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
+    end
+  },
+
+  {
     -- Add indentation guides even on blank lines
     'lukas-reineke/indent-blankline.nvim',
     -- Enable `lukas-reineke/indent-blankline.nvim`
@@ -273,6 +283,9 @@ vim.o.splitbelow = true       -- Horizontal split to the bottom
 vim.o.linebreak = true        -- Wrap on word boundary
 vim.o.laststatus = 3          -- Set global statusline
 vim.o.cursorline = true       -- Highlight all lines with a cursor
+vim.o.tabstop = 4             -- Number of indent in tab
+vim.o.shiftwidth = 4          -- Number of indent in >>
+vim.o.expandtab = true        -- Expand tab to spaces
 
 -- [[ Basic Keymaps ]]
 
